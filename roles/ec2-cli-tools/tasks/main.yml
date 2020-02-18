@@ -1,0 +1,8 @@
+---
+- include: java.yml
+  tags:
+    - java
+
+- include: hadoop.yml
+- include: hive.yml
+- include: spark.yml

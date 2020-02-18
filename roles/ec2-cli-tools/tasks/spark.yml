@@ -17,3 +17,8 @@
   template:
     src: spark-env.sh.j2
     dest: "/opt/spark-{{ spark_version }}/conf/spark-env.sh"
+
+- name: Add Spark bin path to env
+  copy:
+    dest: /etc/profile.d/spark_bin.sh
+    content: "export PATH=$PATH:/opt/spark-{{ spark_version }}/bin"
