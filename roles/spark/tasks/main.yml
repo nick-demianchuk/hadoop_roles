@@ -1,11 +1,18 @@
 --- 
+
+- name: Make hadoop directory
+  file:
+    path: "/opt/spark-{{ spark_version }}"
+    state: directory
+    mode: '0755'
+
 - name: Download and unarchive spark tarball
   unarchive:
     src: "{{ spark_tarball_url }}"
-    dest: "/opt/"
+    dest: "/opt/spark-{{ spark_version }}"
     remote_src: yes
 
 - name: Sen env config from template
   template:
     src: spark-env.sh.j2
-    dest: "/opt/spark-{{spark_version}}/conf/spark-env.sh"
+    dest: "/opt/spark-{{ spark_version }}/conf/spark-env.sh"

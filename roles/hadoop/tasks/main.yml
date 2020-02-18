@@ -1,9 +1,15 @@
 ---
 
+- name: Make hadoop directory
+  file:
+    path: "/opt/hadoop-{{hadoop_version}}"
+    state: directory
+    mode: '0755'
+
 - name: Download and unarchive hadoop tarball
   unarchive:
     src: "{{ hadoop_tarball_url }}"
-    dest: /opt/hadoop-{{hadoop_version}}
+    dest: "/opt/hadoop-{{hadoop_version}}"
     remote_src: yes
 
 - name: Add JAVA_HOME env
