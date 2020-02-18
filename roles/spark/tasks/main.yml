@@ -2,7 +2,7 @@
 - name: Download and unarchive spark tarball
   unarchive:
     src: "{{ spark_tarball_url }}"
-    dest: "/opt/spark-{{spark_version}}"
+    dest: "/opt/"
     remote_src: yes
 
 - name: Sen env config from template

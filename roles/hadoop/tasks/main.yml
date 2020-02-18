@@ -8,5 +8,5 @@
 
 - name: Add JAVA_HOME env
   copy:
-    dest: /etc/profile.d/java_env.sh
+    dest: /etc/profile.d/hadoop_bin.sh
     content: "PATH=$PATH:/opt/hadoop-{{hadoop_version}}/bin"
