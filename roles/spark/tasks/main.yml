@@ -1,0 +1,11 @@
+--- 
+- name: Download and unarchive spark tarball
+  unarchive:
+    src: "{{ spark_tarball_url }}"
+    dest: "/opt/spark-{{spark_version}}"
+    remote_src: yes
+
+- name: Sen env config from template
+  template:
+    src: spark-env.sh.j2
+    dest: "/opt/spark-{{spark_version}}/conf/spark-env.sh"

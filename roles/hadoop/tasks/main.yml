@@ -1,0 +1,12 @@
+---
+
+- name: Download and unarchive hadoop tarball
+  unarchive:
+    src: "{{ hadoop_tarball_url }}"
+    dest: /opt/hadoop-{{hadoop_version}}
+    remote_src: yes
+
+- name: Add JAVA_HOME env
+  copy:
+    dest: /etc/profile.d/java_env.sh
+    content: "PATH=$PATH:/opt/hadoop-{{hadoop_version}}/bin"
