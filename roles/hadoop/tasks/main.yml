@@ -16,4 +16,4 @@
 - name: Add Hadoop path to env
   copy:
     dest: /etc/profile.d/hadoop_bin.sh
-    content: "PATH=$PATH:/opt/hadoop-{{hadoop_version}}/bin"
+    content: "export PATH=$PATH:/opt/hadoop-{{hadoop_version}}/bin"

@@ -11,4 +11,4 @@
 - name: Add JAVA_HOME env
   copy:
     dest: /etc/profile.d/java_env.sh
-    content: "JAVA_HOME={{ java_home.stdout }}"
+    content: "export JAVA_HOME={{ java_home.stdout }}"
