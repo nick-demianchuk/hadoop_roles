@@ -1,0 +1,24 @@
+--- 
+
+- name: Make hadoop directory
+  file:
+    path: "/opt/spark-{{ hadoop_tools_spark_version }}"
+    state: directory
+    mode: '0755'
+
+- name: Download and unarchive spark tarball
+  unarchive:
+    src: "{{ hadoop_tools_spark_tarball_url }}"
+    dest: "/opt/spark-{{ hadoop_tools_spark_version }}"
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+
+- name: Sen env config from template
+  template:
+    src: spark-env.sh.j2
+    dest: "/opt/spark-{{ hadoop_tools_spark_version }}/conf/spark-env.sh"
+
+- name: Add Spark bin path to env
+  copy:
+    dest: /etc/profile.d/spark_bin.sh
+    content: "export PATH=$PATH:/opt/spark-{{ hadoop_tools_spark_version }}/bin"

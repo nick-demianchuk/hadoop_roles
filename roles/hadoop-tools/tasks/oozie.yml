@@ -1,0 +1,13 @@
+---
+- name: Make oozie directory
+  file:
+    path: "/opt/oozie-{{ oozie_version }}"
+    state: directory
+    mode: '0755'
+
+- name: Download and unarchive hadoop tarball
+  unarchive:
+    src: "{{ hadoop_tarball_url }}"
+    dest: "/opt/hadoop-{{hadoop_version}}"
+    remote_src: yes
+    extra_opts: [--strip-components=1]

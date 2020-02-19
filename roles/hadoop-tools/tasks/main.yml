@@ -1,0 +1,17 @@
+---
+  
+- include: java.yml
+  tags:
+    - hadoop-tools-java
+
+- include: hadoop.yml
+  tags:
+    - hadoop-tools-hadoop
+
+- include: hive.yml
+  tags:
+    - hadoop-tools-hive
+
+- include: spark.yml
+  tags:
+    - hadoop-tools-spark
