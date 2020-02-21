@@ -15,3 +15,7 @@
 - include: spark.yml
   tags:
     - hadoop-tools-spark
+
+- include: oozie-client.yml
+  tags:
+    - hadoop-tools-oozie-client

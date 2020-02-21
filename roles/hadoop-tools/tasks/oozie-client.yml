@@ -1,0 +1,36 @@
+---
+- name: Make oozie directory
+  file:
+    path: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}"
+    state: directory
+    mode: '0755'
+
+- name: Download and unarchive hadoop tarball
+  unarchive:
+    src: "{{ hadoop_tools_oozie_tarball_url }}"
+    dest: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}"
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+
+- name: Install Maven to build the oozie client
+  yum:
+    name: maven
+    state: latest
+
+- name: Build oozie client tarball
+  command: "mvn assembly:assembly -Dmaven.test.skip=true"
+  args:
+    chdir: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/client"
+    creates: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/client/target/oozie-client-{{ hadoop_tools_oozie_version }}-client"
+
+- name: Move oozie client to more appropriate location
+  command: "mv /usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/client/target/oozie-client-{{ hadoop_tools_oozie_version }}-client/oozie-client-{{ hadoop_tools_oozie_version }} /opt"
+  args:
+    creates: "/opt/oozie-client-{{ hadoop_tools_oozie_version }}"
+
+- name: Add oozie binary to path
+  copy:
+    dest: /etc/profile.d/oozie_bin.sh
+    content: "export PATH=$PATH:/opt/oozie-client-{{ hadoop_tools_oozie_version }}/bin"
+
+
