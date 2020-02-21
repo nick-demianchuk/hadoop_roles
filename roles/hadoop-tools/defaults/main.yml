@@ -1,6 +1,6 @@
 ---
 
-hadoop_tools_hadoop_version: "2.8.5"
+hadoop_tools_hadoop_version: 2.8.5
 hadoop_tools_hadoop_tarball_url: "http://apache.newfountain.nl/hadoop/common/hadoop-{{ hadoop_tools_hadoop_version }}/hadoop-{{ hadoop_tools_hadoop_version }}.tar.gz"
 
 hadoop_tools_hive_version: 2.3.6

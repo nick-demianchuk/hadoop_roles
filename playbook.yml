@@ -3,4 +3,4 @@
   become: yes
   become_user: root
   roles:
-    - ec2-cli-tools 
+    - hadoop-tools
