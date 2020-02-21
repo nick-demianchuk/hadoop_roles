@@ -11,7 +11,16 @@
     dest: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}"
     remote_src: yes
     extra_opts: [--strip-components=1]
-    creates: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}"
+    creates: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/pom.xml"
+
+- name: Add Centos Base repo to install Maven from
+  yum_repository:
+    name: centos-base
+    description: Centos Base repo
+    file: Centos-Base
+    mirrorlist: http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os&infra=$infra
+    gpgcheck: yes
+    gpgkey: http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7
 
 - name: Install Maven to build the oozie client
   yum:
