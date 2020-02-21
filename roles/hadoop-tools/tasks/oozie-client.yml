@@ -11,11 +11,18 @@
     dest: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}"
     remote_src: yes
     extra_opts: [--strip-components=1]
+    creates: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}"
 
 - name: Install Maven to build the oozie client
   yum:
     name: maven
     state: latest
+
+- name: Fix repositories to use https instead of http
+  replace:
+    path: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/pom.xml"
+    regexp: 'http://(?=repo1.maven.org)'
+    replace: 'https://'
 
 - name: Build oozie client tarball
   command: "mvn assembly:assembly -Dmaven.test.skip=true"
