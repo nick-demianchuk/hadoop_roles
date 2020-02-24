@@ -5,6 +5,8 @@
     path: "/opt/hive-{{ hadoop_tools_hive_version }}"
     state: directory
     mode: '0755'
+  tags:
+    - directory
 
 - name: Download and unarchive hive tarball
   unarchive:
@@ -12,10 +14,14 @@
     dest: "/opt/hive-{{ hadoop_tools_hive_version }}"
     remote_src: yes
     extra_opts: [--strip-components=1]
+  tags:
+    - install
 
 - name: Add HIVE_HOME and Hive bin to env
   template:
     src: hive_env.sh.j2
     dest: /etc/profile.d/hive_env.sh
+  tags:
+    - env
     
 

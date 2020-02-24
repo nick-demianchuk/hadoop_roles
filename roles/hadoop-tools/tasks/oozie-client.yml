@@ -18,6 +18,8 @@
     path: "/opt/maven"
     state: directory
     mode: '0755'
+  tags:
+    - directory
 
 - name: Download and unarchive maven tarball
   unarchive:
@@ -26,32 +28,44 @@
     remote_src: yes
     extra_opts: [--strip-components=1]
     creates: "/opt/maven/bin/mvn"
+  tags:
+    - install
 
 - name: Fix repositories to use https instead of http
   replace:
     path: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/pom.xml"
     regexp: 'http://(?=repo1.maven.org)'
     replace: 'https://'
+  tags:
+    - install
 
 - name: Install Java devel
   yum:
     name: java-devel
     state: installed
+  tags:
+    - install
 
 - name: Build oozie client tarball
   command: "/opt/maven/bin/mvn assembly:assembly -Dmaven.test.skip=true"
   args:
     chdir: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/client"
     creates: "/usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/client/target/oozie-client-{{ hadoop_tools_oozie_version }}-client"
+  tags: 
+    - install
 
 - name: Move oozie client to more appropriate location
   command: "mv /usr/local/src/oozie-{{ hadoop_tools_oozie_version }}/client/target/oozie-client-{{ hadoop_tools_oozie_version }}-client/oozie-client-{{ hadoop_tools_oozie_version }} /opt"
   args:
     creates: "/opt/oozie-client-{{ hadoop_tools_oozie_version }}"
+  tags:
+    - install
 
 - name: Add oozie binary to path
   copy:
     dest: /etc/profile.d/oozie_bin.sh
     content: "export PATH=$PATH:/opt/oozie-client-{{ hadoop_tools_oozie_version }}/bin"
+  tags: 
+    - env
 
 
