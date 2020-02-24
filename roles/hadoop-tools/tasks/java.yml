@@ -1,4 +1,0 @@
---- 
-- name: Install java
-  import_role:
-    name: java

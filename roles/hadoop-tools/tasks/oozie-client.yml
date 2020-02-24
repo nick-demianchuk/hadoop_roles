@@ -36,7 +36,7 @@
 - name: Install Java devel
   yum:
     name: java-devel
-    state: latest
+    state: installed
 
 - name: Build oozie client tarball
   command: "/opt/maven/bin/mvn assembly:assembly -Dmaven.test.skip=true"

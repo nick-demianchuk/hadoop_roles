@@ -1,21 +1,23 @@
 ---
   
-- include: java.yml
+- name: Install java
+  import_role:
+    name: java
   tags:
     - hadoop-tools-java
 
-- include: hadoop.yml
+- include_tasks: hadoop.yml
   tags:
     - hadoop-tools-hadoop
 
-- include: hive.yml
+- include_tasks: hive.yml
   tags:
     - hadoop-tools-hive
 
-- include: spark.yml
+- include_tasks: spark.yml
   tags:
     - hadoop-tools-spark
 
-- include: oozie-client.yml
+- include_tasks: oozie-client.yml
   tags:
     - hadoop-tools-oozie-client
