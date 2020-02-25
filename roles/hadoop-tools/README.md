@@ -9,7 +9,7 @@ EMR or Hadoop cluster
 Available variables are listed below, along with the default values (see `defaults/main.yml)
 
 ```
-hadoop_tools_hadoop_version: "2.8.5"
+hadoop_tools_hadoop_version: 2.8.5
 hadoop_tools_hadoop_tarball_url: "http://apache.newfountain.nl/hadoop/common/hadoop-{{ hadoop_tools_hadoop_version }}/hadoop-{{ hadoop_tools_hadoop_version }}.tar.gz"
 
 hadoop_tools_hive_version: 2.3.6
@@ -20,6 +20,8 @@ hadoop_tools_spark_tarball_url: "https://archive.apache.org/dist/spark/spark-{{ 
 
 hadoop_tools_oozie_version: 5.1.0
 hadoop_tools_oozie_tarball_url: "http://apache.40b.nl/oozie/{{ hadoop_tools_oozie_version }}/oozie-{{ hadoop_tools_oozie_version }}.tar.gz"
+
+hadoop_tools_maven_tarball_url: "http://us.mirrors.quenda.co/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
 ```
 
 ## Dependenices

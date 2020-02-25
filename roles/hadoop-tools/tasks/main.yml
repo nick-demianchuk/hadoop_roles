@@ -3,6 +3,8 @@
 - name: Install java
   import_role:
     name: java
+  vars:
+    java_version: 1.8.0_60
   tags:
     - hadoop-tools-java
 
