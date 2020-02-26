@@ -42,7 +42,7 @@
 - name: Install Java devel
   yum:
     name: java-devel
-    state: installed
+    state: present
   tags:
     - install
 
